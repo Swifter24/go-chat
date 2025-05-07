@@ -52,8 +52,8 @@ func (g *groupInfoService) CreateGroup(groupReq request.CreateGroupRequest) (str
 
 	//添加群主本人
 	contact := model.UserContact{
-		UserId:      groupReq.OwnerId,
-		ContactId:   group.Uuid,
+		UserId:      groupReq.OwnerId, //群员id
+		ContactId:   group.Uuid,       //群组id
 		ContactType: contact_type_enum.GROUP,
 		Status:      contact_status_enum.NORMAL,
 		CreatedAt:   time.Now(),
@@ -156,8 +156,8 @@ func (g *groupInfoService) EnterGroupDirectly(ownerId, contactId string) (string
 		return constants.SYSTEM_ERROR, -1
 	}
 	newContact := model.UserContact{
-		UserId:      contactId,
-		ContactId:   ownerId,
+		UserId:      contactId,                  //群员id
+		ContactId:   ownerId,                    //群组id
 		ContactType: contact_type_enum.GROUP,    // 用户
 		Status:      contact_status_enum.NORMAL, // 正常
 		CreatedAt:   time.Now(),
